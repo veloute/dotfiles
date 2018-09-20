@@ -9,12 +9,12 @@ ZSH_THEME="robbyrussell"
 DEFAULT_USER=$USER
 
 # Update oh-my-zsh
-DISABLE_AUTO_UPDATE="true"
-export UPDATE_ZSH_DAYS=13
+#DISABLE_AUTO_UPDATE="true"
+export UPDATE_ZSH_DAYS=7
 
 # History
 HISTSIZE=1000
-HISTFILE="$HOME/.zsh_history"
+HISTFILE="$HOME/.history"
 SAVEHIST=$HISTSIZE
 HIST_STAMPS="mm/dd/yyyy"
 
@@ -24,6 +24,8 @@ source $ZSH/oh-my-zsh.sh
 
 zstyle ':completion:*' rehash true
 set -o noclobber
+
+setopt no_auto_remove_slash
 
 # Preferred editors
  if [[ -n $SSH_CONNECTION ]]; then
@@ -36,7 +38,6 @@ set -o noclobber
 bindkey '^H' backward-kill-word
 bindkey '[3;5~' kill-word
 
-# Alt + S inserts sudo at the beginning of a command
 insert_sudo () { zle beginning-of-line; zle -U "sudo " }
 zle -N insert-sudo insert_sudo
 bindkey "^[s" insert-sudo
@@ -45,11 +46,15 @@ bindkey "^[s" insert-sudo
 alias sudo='nocorrect sudo '
 alias ht='htop'
 alias ytdl='youtube-dl -f best '
-# For 1080p video on YouTube
+alias ytdlaria='youtube-dl -f best --external-downloader aria2c --external-downloader-args "-x 16 -s 16"'
 alias yt='youtube-dl -f 'bestvideo+bestaudio/best''
-# Make the /etc/hosts file queryable
 alias query='cat /etc/hosts | grep '
 alias remorphans='sudo pacman -Rns $(pacman -Qtdq)'
 alias find='fd -H '
 alias shred='shred -u '
 alias vim='nvim '
+alias rd='rm -r '
+alias aria='aria2c -x 16 -s 16 '
+alias cp='rsync -P '
+alias lg='lazygit '
+alias grep='rg'
